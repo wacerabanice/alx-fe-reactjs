@@ -1,0 +1,3 @@
+This project is designed to introduce me to the essential elements of React, a popular JavaScript library for building user interfaces. This project aims to provide a solid foundation in React, - guiding through the creation and modification of basic React applications and components. 
+
+Main practical experience in setting up React applications, understanding JSX, and working with components and props.
