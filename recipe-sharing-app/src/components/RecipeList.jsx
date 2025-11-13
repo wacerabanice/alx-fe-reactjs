@@ -7,20 +7,32 @@ const RecipeList = () => {
   const recipes = useRecipeStore((state) =>
     state.filteredRecipes.length > 0 ? state.filteredRecipes : state.recipes
   );
+  const addFavorite = useRecipeStore((state) => state.addFavorite);
+  const favorites = useRecipeStore((state) => state.favorites);
 
   if (recipes.length === 0) return <p>No recipes found.</p>;
 
   return (
     <div className="space-y-2">
       {recipes.map((recipe) => (
-        <Link
+        <div
           key={recipe.id}
-          to={`/recipe/${recipe.id}`}
-          className="block border p-4 rounded shadow-sm hover:bg-gray-50"
+          className="border p-4 rounded shadow-sm flex justify-between items-center"
         >
-          <h3 className="font-bold text-lg">{recipe.title}</h3>
-          <p>{recipe.description}</p>
-        </Link>
+          <Link to={`/recipe/${recipe.id}`}>
+            <div>
+              <h3 className="font-bold text-lg">{recipe.title}</h3>
+              <p>{recipe.description}</p>
+            </div>
+          </Link>
+          <button
+            className="text-blue-500"
+            onClick={() => addFavorite(recipe.id)}
+            disabled={favorites.includes(recipe.id)}
+          >
+            {favorites.includes(recipe.id) ? 'Favorited' : 'Favorite'}
+          </button>
+        </div>
       ))}
     </div>
   );
