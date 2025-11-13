@@ -10,12 +10,15 @@ function App() {
     <div className="max-w-xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Recipe Sharing App</h1>
 
+      {/* Show AddRecipeForm only when no recipe is selected */}
       {!selectedRecipeId && <AddRecipeForm />}
 
+      {/* Show RecipeList only when no recipe is selected */}
       {!selectedRecipeId && (
         <RecipeList onSelectRecipe={setSelectedRecipeId} />
       )}
 
+      {/* Show RecipeDetails when a recipe is selected */}
       {selectedRecipeId && (
         <RecipeDetails
           recipeId={selectedRecipeId}

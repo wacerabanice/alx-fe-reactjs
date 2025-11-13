@@ -15,11 +15,9 @@ const RecipeDetails = ({ recipeId, onBack }) => {
       <h1 className="text-2xl font-bold mb-2">{recipe.title}</h1>
       <p className="mb-4">{recipe.description}</p>
 
+      {/* Render EditRecipeForm and DeleteRecipeButton */}
       <EditRecipeForm recipe={recipe} />
-      <DeleteRecipeButton
-        recipeId={recipe.id}
-        onDeleted={onBack} // automatically go back after deletion
-      />
+      <DeleteRecipeButton recipeId={recipe.id} onDeleted={onBack} />
 
       <button
         onClick={onBack}

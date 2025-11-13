@@ -2,11 +2,11 @@ import React from 'react';
 import { useRecipeStore } from './recipeStore';
 
 const DeleteRecipeButton = ({ recipeId, onDeleted }) => {
-  const setRecipes = useRecipeStore((state) => state.setRecipes);
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
 
   const handleDelete = () => {
-    setRecipes((prev) => prev.filter((r) => r.id !== recipeId));
-    if (onDeleted) onDeleted();
+    deleteRecipe(recipeId);
+    if (onDeleted) onDeleted(); // Go back to list after deletion
   };
 
   return (

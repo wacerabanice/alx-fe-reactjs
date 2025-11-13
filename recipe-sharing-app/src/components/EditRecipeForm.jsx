@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useRecipeStore } from './recipeStore';
 
 const EditRecipeForm = ({ recipe }) => {
-  const setRecipes = useRecipeStore((state) => state.setRecipes);
-
-  if (!recipe) return null;
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
 
+  // Update local state if the recipe prop changes
   useEffect(() => {
     setTitle(recipe.title);
     setDescription(recipe.description);
@@ -16,9 +15,7 @@ const EditRecipeForm = ({ recipe }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setRecipes((prev) =>
-      prev.map((r) => (r.id === recipe.id ? { ...r, title, description } : r))
-    );
+    updateRecipe(recipe.id, { title, description });
   };
 
   return (
@@ -28,12 +25,14 @@ const EditRecipeForm = ({ recipe }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         className="border p-2 rounded w-full"
+        placeholder="Edit title"
       />
       <input
         type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         className="border p-2 rounded w-full"
+        placeholder="Edit description"
       />
       <button
         type="submit"
