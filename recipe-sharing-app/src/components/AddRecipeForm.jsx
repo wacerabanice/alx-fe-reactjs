@@ -15,23 +15,24 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit} className="mb-6">
       <input
-        className="border p-2 mr-2 rounded"
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Recipe Title"
+        className="border p-2 rounded w-full mb-2"
       />
-      <textarea
-        className="border p-2 rounded mr-2"
+      <input
+        type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Recipe Description"
+        className="border p-2 rounded w-full mb-2"
       />
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="bg-blue-500 text-white px-4 py-2 rounded w-full"
       >
         Add Recipe
       </button>
