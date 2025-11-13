@@ -7,14 +7,15 @@ const EditRecipeForm = ({ recipe }) => {
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
 
-  // Update local state if the recipe prop changes
+  // Update local state if recipe prop changes
   useEffect(() => {
     setTitle(recipe.title);
     setDescription(recipe.description);
   }, [recipe]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // ✅ Form submission handler with event.preventDefault
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
     updateRecipe(recipe.id, { title, description });
   };
 
