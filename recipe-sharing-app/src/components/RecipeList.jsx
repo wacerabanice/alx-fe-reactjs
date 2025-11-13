@@ -1,12 +1,15 @@
+// src/components/RecipeList.jsx
 import React from 'react';
 import { useRecipeStore } from './recipeStore';
 import { useNavigate } from 'react-router-dom';
 
 const RecipeList = () => {
-  const recipes = useRecipeStore((state) => state.recipes);
+  const recipes = useRecipeStore((state) =>
+    state.filteredRecipes.length > 0 ? state.filteredRecipes : state.recipes
+  );
   const navigate = useNavigate();
 
-  if (recipes.length === 0) return <p>No recipes added yet.</p>;
+  if (recipes.length === 0) return <p>No recipes found.</p>;
 
   return (
     <div className="space-y-2">
