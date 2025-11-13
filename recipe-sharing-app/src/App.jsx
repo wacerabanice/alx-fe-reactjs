@@ -17,9 +17,9 @@ function App() {
             path="/"
             element={
               <>
-                <SearchBar /> {/* ✅ SearchBar added */}
+                <SearchBar /> {/* Prominent search bar */}
                 <AddRecipeForm />
-                <RecipeList />
+                <RecipeList /> {/* Filtered results displayed here */}
               </>
             }
           />

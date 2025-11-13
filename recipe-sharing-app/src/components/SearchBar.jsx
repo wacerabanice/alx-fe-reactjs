@@ -7,7 +7,7 @@ const SearchBar = () => {
   const filterRecipes = useRecipeStore((state) => state.filterRecipes);
   const searchTerm = useRecipeStore((state) => state.searchTerm);
 
-  // Whenever searchTerm changes, filter the recipes
+  // Dynamically filter recipes whenever search term changes
   useEffect(() => {
     filterRecipes();
   }, [searchTerm, filterRecipes]);
@@ -16,9 +16,9 @@ const SearchBar = () => {
     <input
       type="text"
       placeholder="Search recipes..."
-      className="border p-2 rounded w-full mb-4"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
+      className="border p-2 rounded w-full mb-4"
     />
   );
 };
