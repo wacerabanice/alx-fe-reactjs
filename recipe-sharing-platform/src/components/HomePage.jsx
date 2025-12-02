@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import recipesData from "../data/data.json";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -28,7 +29,19 @@ const HomePage = () => {
               alt={recipe.title}
               className="w-full h-48 object-cover"
             />
-
+            <Link to={`/recipe/${recipe.id}`} key={recipe.id}>
+         <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+    <img
+      src={recipe.image}
+      alt={recipe.title}
+      className="w-full h-48 object-cover"
+    />
+    <div className="p-4">
+      <h2 className="text-xl font-semibold">{recipe.title}</h2>
+      <p className="text-gray-600 text-sm mt-2">{recipe.summary}</p>
+    </div>
+  </div>
+</Link>
             <div className="p-4">
               <h2 className="text-xl font-semibold">{recipe.title}</h2>
               <p className="text-gray-600 text-sm mt-2">{recipe.summary}</p>
@@ -37,6 +50,7 @@ const HomePage = () => {
         ))}
       </div>
     </div>
+    
   );
 };
 
