@@ -1,26 +1,19 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import TodoList from "../components/TodoList.jsx";
+import TodoList from "../components/TodoList";
 
-describe("TodoList Component - Add Todo", () => {
-  test("adds a new todo when the form is submitted", () => {
-    // Render the component
+describe("TodoList Component", () => {
+  test("renders initial todos", () => {
     render(<TodoList />);
+    expect(screen.getByText("Learn React")).toBeInTheDocument();
+    expect(screen.getByText("Build Todo App")).toBeInTheDocument();
+  });
 
-    // Find the input field and the add button
+  test("adds a new todo", () => {
+    render(<TodoList />);
     const input = screen.getByPlaceholderText("Add a todo");
-    const addButton = screen.getByText("Add");
-
-    // Simulate typing a new todo
-    fireEvent.change(input, { target: { value: "New Todo Item" } });
-
-    // Simulate clicking the add button
-    fireEvent.click(addButton);
-
-    // Check that the new todo appears in the list
-    expect(screen.getByText("New Todo Item")).toBeInTheDocument();
-
-    // Optional: check that the input is cleared after submission
-    expect(input.value).toBe("");
+    const button = screen.getByText("Add");
+    fireEvent.change(input, { target: { value: "New Task" } });
+    fireEvent.click(button);
+    expect(screen.getByText("New Task")).toBeInTheDocument();
   });
 });

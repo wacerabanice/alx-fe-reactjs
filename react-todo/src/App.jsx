@@ -1,9 +1,9 @@
-import React from "react";
-import TodoList from "./components/TodoList.jsx";
+import React from 'react';
+import TodoList from './components/TodoList';
 
 export default function App() {
   return (
-    <div className="p-6">
+    <div>
       <TodoList />
     </div>
   );
