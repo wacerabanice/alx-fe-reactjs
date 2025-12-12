@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 export default function App() {
   return (
+        <BrowserRouter>
     <div className="p-6">
       <nav className="mb-4">
         <Link to="/" className="mr-4">Home</Link>
@@ -27,5 +28,6 @@ export default function App() {
         <Route path="/post/:postId" element={<Post />} />
       </Routes>
     </div>
+        </BrowserRouter>
   );
 }
