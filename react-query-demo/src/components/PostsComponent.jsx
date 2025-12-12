@@ -1,4 +1,3 @@
-// src/components/PostsComponent.jsx
 import { useQuery } from "@tanstack/react-query";
 
 const fetchPosts = async () => {
@@ -11,6 +10,7 @@ function PostsComponent() {
   const {
     data,
     isLoading,
+    isError,
     error,
     refetch,
     isFetching,
@@ -19,14 +19,14 @@ function PostsComponent() {
     queryFn: fetchPosts,
 
     // React Query Config
-    cacheTime: 1000 * 60 * 5,          // keep cached data for 5 minutes
-    staleTime: 1000 * 30,              // data stays "fresh" for 30 seconds
-    refetchOnWindowFocus: false,       // do not refetch just by focusing window
-    keepPreviousData: true,            // show old data while fetching new data
+    cacheTime: 1000 * 60 * 5,        // 5 minutes
+    staleTime: 1000 * 30,            // 30 seconds
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
   });
 
   if (isLoading) return <p>Loading posts...</p>;
-  if (error) return <p>Error fetching posts.</p>;
+  if (isError) return <p>Error fetching posts: {error.message}</p>;
 
   return (
     <div>
