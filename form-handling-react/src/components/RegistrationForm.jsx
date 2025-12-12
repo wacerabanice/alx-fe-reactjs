@@ -13,6 +13,11 @@ export default function RegistrationForm() {
     setSuccess('')
 
     // Basic validation
+    if (!username) {
+      setErrors("UserName is required");
+      return;
+    }
+
     if (!email) {
       setErrors("Email is required");
       return;
@@ -22,7 +27,7 @@ export default function RegistrationForm() {
       setErrors("Password is required");
       return;
     }
-    
+
     // Simple email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
