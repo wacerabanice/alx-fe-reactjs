@@ -1,11 +1,11 @@
-import FormikForm from './components/formikForm'
+import PostsComponent from "./components/PostsComponent";
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <FormikForm />
+    <div className="min-h-screen bg-gray-100 p-6">
+      <PostsComponent />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
