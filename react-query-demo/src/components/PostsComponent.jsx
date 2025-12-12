@@ -1,52 +1,51 @@
-import React from "react";
+// src/components/PostsComponent.jsx
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 const fetchPosts = async () => {
-  const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-  return res.data;
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  if (!res.ok) throw new Error("Failed to fetch posts");
+  return res.json();
 };
 
-export default function PostsComponent() {
+function PostsComponent() {
   const {
     data,
     isLoading,
-    isError,
     error,
     refetch,
     isFetching,
   } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-    // optional: override options here if desired
-    // staleTime: 1000 * 30,
+
+    // React Query Config
+    cacheTime: 1000 * 60 * 5,          // keep cached data for 5 minutes
+    staleTime: 1000 * 30,              // data stays "fresh" for 30 seconds
+    refetchOnWindowFocus: false,       // do not refetch just by focusing window
+    keepPreviousData: true,            // show old data while fetching new data
   });
 
-  if (isLoading) return <div className="p-4">Loading posts...</div>;
-  if (isError) return <div className="p-4 text-red-600">Error: {error.message}</div>;
+  if (isLoading) return <p>Loading posts...</p>;
+  if (error) return <p>Error fetching posts.</p>;
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold">Posts (React Query)</h2>
-        <div className="flex gap-2 items-center">
-          <button
-            onClick={() => refetch()}
-            className="px-3 py-1 bg-blue-600 text-white rounded"
-          >
-            {isFetching ? "Updating..." : "Refetch"}
-          </button>
-        </div>
-      </div>
+    <div>
+      <h2>Posts Loaded Using React Query</h2>
 
-      <ul className="space-y-3">
-        {data.map((post) => (
-          <li key={post.id} className="p-3 border rounded bg-white shadow-sm">
-            <h3 className="font-semibold">{post.title}</h3>
-            <p className="text-sm text-gray-600">{post.body}</p>
+      <button onClick={() => refetch()} style={{ marginBottom: "10px" }}>
+        {isFetching ? "Refreshing..." : "Refetch Posts"}
+      </button>
+
+      <ul>
+        {data?.slice(0, 10).map((post) => (
+          <li key={post.id} style={{ marginBottom: "8px" }}>
+            <strong>{post.title}</strong>
+            <p>{post.body}</p>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
+export default PostsComponent;
