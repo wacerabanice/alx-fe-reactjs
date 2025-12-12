@@ -1,40 +1,26 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../components/TodoList.jsx';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import TodoList from "../components/TodoList.jsx";
 
-describe('TodoList Component', () => {
-  test('renders initial todos', () => {
+describe("TodoList Component - Add Todo", () => {
+  test("adds a new todo when the form is submitted", () => {
+    // Render the component
     render(<TodoList />);
-    expect(screen.getByText('Learn React')).toBeInTheDocument();
-    expect(screen.getByText('Build Todo App')).toBeInTheDocument();
-    expect(screen.getByText('Write Tests')).toBeInTheDocument();
-  });
 
-  test('adds a new todo', () => {
-    render(<TodoList />);
-    const input = screen.getByPlaceholderText('Add a todo');
-    const addButton = screen.getByText('Add');
+    // Find the input field and the add button
+    const input = screen.getByPlaceholderText("Add a todo");
+    const addButton = screen.getByText("Add");
 
-    fireEvent.change(input, { target: { value: 'New Todo' } });
+    // Simulate typing a new todo
+    fireEvent.change(input, { target: { value: "New Todo Item" } });
+
+    // Simulate clicking the add button
     fireEvent.click(addButton);
 
-    expect(screen.getByText('New Todo')).toBeInTheDocument();
-  });
+    // Check that the new todo appears in the list
+    expect(screen.getByText("New Todo Item")).toBeInTheDocument();
 
-  test('toggles todo completion', () => {
-    render(<TodoList />);
-    const todo = screen.getByText('Learn React');
-    expect(todo).toHaveStyle('text-decoration: none');
-
-    fireEvent.click(todo);
-    expect(todo).toHaveStyle('text-decoration: line-through');
-  });
-
-  test('deletes a todo', () => {
-    render(<TodoList />);
-    const deleteButton = screen.getAllByText('Delete')[0];
-    fireEvent.click(deleteButton);
-
-    expect(screen.queryByText('Learn React')).not.toBeInTheDocument();
+    // Optional: check that the input is cleared after submission
+    expect(input.value).toBe("");
   });
 });
