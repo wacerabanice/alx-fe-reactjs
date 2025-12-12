@@ -4,24 +4,24 @@ export default function RegistrationForm() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [errors, setErrors] = useState('')
   const [success, setSuccess] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setError('')
+    setErrors('')
     setSuccess('')
 
     // Basic validation
     if (!username || !email || !password) {
-      setError('Please fill in all fields.')
+      setErrors('Please fill in all fields.')
       return
     }
 
     // Simple email format check
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address.')
+      setErrors('Please enter a valid email address.')
       return
     }
 
