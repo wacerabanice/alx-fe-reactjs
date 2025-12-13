@@ -18,6 +18,12 @@ describe("TodoList Component", () => {
     expect(screen.getByText("Test Todo")).toBeInTheDocument();
   });
 
+
+const todo = screen.getByText("Learn React");
+fireEvent.click(todo);
+expect(todo).toHaveStyle("text-decoration: line-through");
+
+
   test("toggles a todo completed status", () => {
     render(<TodoList />);
     const todo = screen.getByText("Learn React");
